@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - Kina Resort</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="/assets/logo.png" alt="Kina Resort Logo" class="logo">
+            <h1>Kina Resort Staff Dashboard</h1>
+            <div class="header-actions">
+                <span class="user-info" id="userInfo"></span>
+                <button class="btn btn-secondary" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <button class="nav-btn active" data-view="assignments">Bookings</button>
+        <button class="nav-btn" data-view="today">Today's Schedule</button>
+        <button class="nav-btn" data-view="checkins">Check-ins</button>
+        <button class="nav-btn" data-view="checkouts">Check-outs</button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Assignments View -->
+        <div id="assignments-view" class="view active">
+            <div class="view-header">
+                <h2>Bookings</h2>
+                <div class="header-actions-group">
+                    <input type="text" id="searchInput" placeholder="Search bookings..." class="search-input">
+                    <button class="btn btn-primary" id="addBookingBtn">Add Booking</button>
+                </div>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="info-card">
+                    <div class="card-icon">📋</div>
+                    <div class="card-content">
+                        <h3 id="pendingCount">0</h3>
+                        <p>Pending Bookings</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">✅</div>
+                    <div class="card-content">
+                        <h3 id="confirmedCount">0</h3>
+                        <p>Confirmed Bookings</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Guest Name</th>
+                            <th>Contact</th>
+                            <th>Room Type</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assignmentsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Today's Schedule View -->
+        <div id="today-view" class="view">
+            <h2>Today's Schedule</h2>
+            
+            <div class="schedule-cards">
+                <div class="schedule-card">
+                    <h3>Today's Check-ins <span class="room-type-label">Room Type</span></h3>
+                    <div id="todayCheckIns"></div>
+                </div>
+                <div class="schedule-card">
+                    <h3>Today's Check-outs <span class="room-type-label">Room Type</span></h3>
+                    <div id="todayCheckOuts"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Check-ins View -->
+        <div id="checkins-view" class="view">
+            <h2>Upcoming Check-ins</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Guest Name</th>
+                            <th>Room Type</th>
+                            <th>Check-in Date</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="checkInsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Check-outs View -->
+        <div id="checkouts-view" class="view">
+            <h2>Upcoming Check-outs</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Guest Name</th>
+                            <th>Room Type</th>
+                            <th>Check-out Date</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="checkOutsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Booking Details Modal -->
+    <div id="bookingDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Booking Details</h3>
+            <div id="bookingDetailsContent"></div>
+            <div class="modal-actions">
+                <button class="btn btn-success" id="confirmBookingBtn">Confirm</button>
+                <button class="btn btn-secondary" id="closeDetailsBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Add New Booking</h3>
+            <form id="addBookingForm">
+                <div class="form-group">
+                    <label>Guest Name *</label>
+                    <input type="text" name="guest_name" required>
+                </div>
+                <div class="form-group">
+                    <label>Guest Email *</label>
+                    <input type="email" name="guest_email" required>
+                </div>
+                <div class="form-group">
+                    <label>Guest Phone</label>
+                    <input type="tel" name="guest_phone">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Adults *</label>
+                        <input type="number" name="adults" required min="0" value="1" id="adultsInput">
+                    </div>
+                    <div class="form-group">
+                        <label>Kids *</label>
+                        <input type="number" name="kids" required min="0" value="0" id="kidsInput">
+                        <small>1 year old is free</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Visit Time *</label>
+                    <select name="visit_time" required>
+                        <option value="">Select Time</option>
+                        <option value="morning">Morning</option>
+                        <option value="night">Night</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Room Type *</label>
+                    <select name="room_type" id="roomTypeSelect" required>
+                        <option value="">Select Room Type</option>
+                        <option value="standard">Standard</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Cottage</label>
+                    <select name="cottage" id="cottageInput">
+                        <option value="">Select Cottage</option>
+                        <option value="tropahan">Tropahan (6 person) - ₱300</option>
+                        <option value="barkads">Barkads (10 person) - ₱400</option>
+                        <option value="family">Family (15 person) - ₱500</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Check-in Date *</label>
+                        <input type="date" name="check_in" id="checkInInput" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Check-out Date *</label>
+                        <input type="date" name="check_out" id="checkOutInput" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Booking Time *</label>
+                    <input type="text" name="booking_time" id="bookingTimeInput" required placeholder="e.g., 9:00 AM - 5:00 PM or 9am to 5pm">
+                    
+                </div>
+                <div class="form-group">
+                    <label>Status *</label>
+                    <select name="status" required>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create Booking</button>
+                    <button type="button" class="btn btn-secondary" id="cancelBookingBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/staff-dashboard.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+==========================================
+✅ KINA RESORT SYSTEM - YOUR CONFIGURATION
+==========================================
+
+📧 EMAIL CONFIGURATION (REQUIRED)
+
+Your Gmail: nashabrenica06@gmail.com
+Password in code: password123 (NEEDS TO BE REPLACED!)
+
+❌ PROBLEM: "password123" will NOT work with Gmail!
+✅ SOLUTION: You MUST use a Gmail App Password
+
+==========================================
+HOW TO GET GMAIL APP PASSWORD:
+==========================================
+
+Step 1: Enable 2-Factor Authentication
+----------------------------------------
+1. Go to: https://myaccount.google.com
+2. Click "Security" (left sidebar)
+3. Click "2-Step Verification"
+4. Follow prompts to enable it
+
+Step 2: Generate App Password
+--------------------------------
+1. In Security settings, find "App passwords"
+2. Click "App passwords"
+3. Select "Mail"
+4. Select "Other (Custom name)"
+5. Enter "Kina Resort" 
+6. Click "Generate"
+7. Copy the 16-character password (example: abcd efgh ijkl mnop)
+
+Step 3: Update Server Code
+--------------------------
+Edit server.js around line 44, replace:
+
+OLD: pass: process.env.SMTP_PASSWORD || 'password123'
+NEW: pass: process.env.SMTP_PASSWORD || 'YOUR-APP-PASSWORD-HERE'
+
+Example:
+pass: process.env.SMTP_PASSWORD || 'abcd efgh ijkl mnop'
+
+Or create a .env file with:
+SMTP_PASSWORD=abcd efgh ijkl mnop
+
+==========================================
+📡 NETWORK SETTINGS
+==========================================
+
+Your server will run on:
+- Local: http://localhost:3000
+- Network: http://192.168.100.14:3000
+
+==========================================
+🚀 START YOUR SERVER
+==========================================
+
+Option 1 (Recommended):
+npm start
+
+Option 2:
+START.bat
+
+Then open: http://localhost:3000
+
+==========================================
+⚠️ CURRENT STATUS
+==========================================
+
+✅ Database: Connected ✅
+✅ Supabase: Configured ✅
+✅ Server Code: Ready ✅
+⚠️ Email: NEEDS APP PASSWORD ⚠️
+
+==========================================
+QUICK TEST
+==========================================
+
+1. Start server: npm start
+2. Open browser: http://localhost:3000
+3. Register admin account
+4. Login with admin credentials
+5. Try creating a booking
+
+==========================================
+

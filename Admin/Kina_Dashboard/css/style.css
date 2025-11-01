@@ -1,0 +1,690 @@
+/* Kina Resort Admin Dashboard Styles */
+
+/* CSS Variables for Color Scheme */
+:root {
+    --primary-yellow: #FFD700;
+    --light-blue: #87CEEB;
+    --white: #FFFFFF;
+    --light-gray: #F5F5F5;
+    --medium-gray: #CCCCCC;
+    --dark-gray: #666666;
+    --text-dark: #333333;
+    --success-green: #28a745;
+    --danger-red: #dc3545;
+    --warning-orange: #ffc107;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --border-radius: 8px;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    --primary-yellow: #FFD700;
+    --light-blue: #4A90E2;
+    --white: #1A1A1A;
+    --light-gray: #2D2D2D;
+    --medium-gray: #404040;
+    --dark-gray: #B0B0B0;
+    --text-dark: #E0E0E0;
+    --success-green: #32CD32;
+    --danger-red: #FF6B6B;
+    --warning-orange: #FFB347;
+    --shadow: 0 2px 4px rgba(0,0,0,0.3);
+    --border-radius: 8px;
+}
+
+/* Dark Theme Specific Styles */
+[data-theme="dark"] body {
+    background-color: #121212;
+}
+
+[data-theme="dark"] .bookings-table tr:hover {
+    background-color: #3A3A3A;
+}
+
+[data-theme="dark"] .calendar-day:hover {
+    background-color: #3A3A3A !important;
+}
+
+[data-theme="dark"] .form-group input:focus,
+[data-theme="dark"] .form-group select:focus {
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+}
+
+[data-theme="dark"] .modal {
+    background-color: rgba(0,0,0,0.8);
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, var(--primary-yellow), var(--light-blue));
+    color: var(--white);
+    padding: 1rem 2rem;
+    box-shadow: var(--shadow);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.theme-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+    transform: rotate(15deg);
+}
+
+/* Navigation */
+.navigation {
+    background-color: var(--white);
+    padding: 0 2rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: 0;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--dark-gray);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+}
+
+.nav-btn.active {
+    color: var(--primary-yellow);
+    border-bottom-color: var(--primary-yellow);
+    background-color: var(--light-gray);
+}
+
+/* Main Content */
+.main-content {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* View Management */
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
+}
+
+/* View Headers */
+.view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--medium-gray);
+}
+
+.view-header h2 {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-yellow);
+    color: var(--text-dark);
+}
+
+.btn-primary:hover {
+    background-color: #E6C200;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--light-blue);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: #6BB6FF;
+}
+
+.btn-success {
+    background-color: var(--success-green);
+    color: var(--white);
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-danger {
+    background-color: var(--danger-red);
+    color: var(--white);
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Bookings Table */
+.bookings-table-container {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bookings-table th {
+    background-color: var(--light-blue);
+    color: var(--white);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.bookings-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.bookings-table tr:hover {
+    background-color: var(--light-gray);
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.status-confirmed {
+    background-color: var(--success-green);
+    color: var(--white);
+}
+
+.status-pending {
+    background-color: var(--warning-orange);
+    color: var(--text-dark);
+}
+
+.status-cancelled {
+    background-color: var(--danger-red);
+    color: var(--white);
+}
+
+.status-suspicious {
+    background-color: var(--danger-red);
+    color: var(--white);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Filter Controls */
+.filter-controls select {
+    padding: 0.5rem;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    background-color: var(--white);
+    font-size: 0.9rem;
+}
+
+/* Calendar */
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.calendar-container {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: var(--medium-gray);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.calendar-day {
+    background-color: var(--white);
+    padding: 0.5rem;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.calendar-day:hover {
+    background-color: var(--light-gray);
+}
+
+.calendar-day.other-month {
+    background-color: #F8F8F8;
+    color: var(--medium-gray);
+}
+
+.calendar-day.today {
+    background-color: var(--primary-yellow);
+    color: var(--text-dark);
+    font-weight: bold;
+}
+
+.calendar-day.booked {
+    background-color: var(--danger-red);
+    color: var(--white);
+}
+
+.calendar-day.available {
+    background-color: var(--success-green);
+    color: var(--white);
+}
+
+.calendar-day.maintenance {
+    background-color: var(--warning-orange);
+    color: var(--text-dark);
+}
+
+.calendar-day-header {
+    background-color: var(--light-blue);
+    color: var(--white);
+    font-weight: 600;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+/* Calendar Legend */
+.calendar-legend {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.legend-color.available {
+    background-color: var(--success-green);
+}
+
+.legend-color.booked {
+    background-color: var(--danger-red);
+}
+
+.legend-color.maintenance {
+    background-color: var(--warning-orange);
+}
+
+/* Booking Form */
+.booking-form {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 600px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.75rem;
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-yellow);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Room Management */
+.rooms-container {
+    display: grid;
+    gap: 2rem;
+}
+
+.room-category {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.room-category h3 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--light-blue);
+}
+
+.rooms-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.room-item {
+    background-color: var(--light-gray);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.room-name {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.room-status {
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    background-color: var(--medium-gray);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-switch.active {
+    background-color: var(--success-green);
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--white);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.toggle-switch.active::after {
+    transform: translateX(26px);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark-gray);
+}
+
+.close:hover {
+    color: var(--text-dark);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: flex-end;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        margin-top: 0.5rem;
+    }
+    
+    .navigation {
+        flex-wrap: wrap;
+        padding: 0 1rem;
+    }
+    
+    .nav-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .bookings-table-container {
+        overflow-x: auto;
+    }
+    
+    .calendar-grid {
+        font-size: 0.8rem;
+    }
+    
+    .calendar-day {
+        min-height: 40px;
+        padding: 0.25rem;
+    }
+    
+    .rooms-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 1rem;
+    }
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.hidden { display: none; }
+.visible { display: block; }
+
+/* Loading States */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Error States */
+.error {
+    color: var(--danger-red);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.success {
+    color: var(--success-green);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}

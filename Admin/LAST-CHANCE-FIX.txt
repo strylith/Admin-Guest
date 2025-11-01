@@ -1,0 +1,75 @@
+========================================
+🔴 LAST CHANCE FIX - READ CAREFULLY!
+========================================
+
+The "Failed to create booking" happens because your 
+bookings table structure doesn't match what the server expects!
+
+========================================
+DO THIS NOW (3 STEPS):
+========================================
+
+STEP 1: Fix Database (CRITICAL!)
+---------------------------------
+1. Open: https://app.supabase.com
+2. Go to: SQL Editor → New query
+3. Copy the EXACT SQL below and paste
+4. Click "Run"
+
+SQL CODE TO COPY:
+--------
+-- Drop and recreate bookings table
+DROP TABLE IF EXISTS bookings CASCADE;
+
+CREATE TABLE bookings (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    guest_name VARCHAR(255) NOT NULL,
+    guest_email VARCHAR(255) NOT NULL,
+    guest_phone VARCHAR(50),
+    room_type VARCHAR(50) NOT NULL,
+    check_in DATE NOT NULL,
+    check_out DATE NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',
+    created_by UUID REFERENCES users(id),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Disable RLS
+ALTER TABLE bookings DISABLE ROW LEVEL SECURITY;
+
+-- Create indexes
+CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings(status);
+CREATE INDEX IF NOT EXISTS idx_bookings_dates ON bookings(check_in, check_out);
+
+-- Test it works
+INSERT INTO bookings (guest_name, guest_email, room_type, check_in, check_out)
+VALUES ('Test User', 'test@test.com', 'standard', CURRENT_DATE, CURRENT_DATE + 1);
+--------
+
+STEP 2: Wait for Server to Start
+----------------------------------
+- A new PowerShell window opened with the server
+- Wait until you see: "Server running on http://192.168.100.14:3000"
+
+STEP 3: Try Creating Booking
+------------------------------
+1. Refresh browser: http://localhost:3000
+2. Try creating a booking
+3. If it fails, check the PowerShell window for the EXACT error
+4. Share that error with me!
+
+========================================
+IF STILL FAILS:
+========================================
+
+Open PowerShell window (where server is running).
+Look for lines saying:
+- "Create booking error:"
+- "Supabase insert error:"
+- "Error:"
+
+Copy that ENTIRE error message and share it!
+
+========================================
+

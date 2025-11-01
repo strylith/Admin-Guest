@@ -1,0 +1,72 @@
+========================================
+COPY THIS SQL AND PASTE IN SUPABASE!
+========================================
+
+Go to: https://app.supabase.com
+Project: gjaskifzrqjcesdnnqpa
+Click: "SQL Editor" → "New query"
+
+Then paste this and click "Run":
+
+========================================
+
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    last_login TIMESTAMP WITH TIME ZONE
+);
+
+CREATE TABLE bookings (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    guest_name VARCHAR(255) NOT NULL,
+    guest_email VARCHAR(255) NOT NULL,
+    guest_phone VARCHAR(50),
+    room_type VARCHAR(50) NOT NULL,
+    check_in DATE NOT NULL,
+    check_out DATE NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',
+    created_by UUID REFERENCES users(id),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE audit_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    user_role VARCHAR(50),
+    action VARCHAR(255) NOT NULL,
+    details TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE email_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    recipient VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    error_message TEXT,
+    sent_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE rooms (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    room_number VARCHAR(50) NOT NULL,
+    room_type VARCHAR(50) NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'available',
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+========================================
+
+After running this SQL:
+1. Go to "Table Editor" and verify you see all 5 tables
+2. Try registration again!
+
+========================================

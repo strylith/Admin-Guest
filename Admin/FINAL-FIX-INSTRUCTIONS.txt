@@ -1,0 +1,73 @@
+========================================
+🔧 FINAL FIX FOR BOOKING ERROR
+========================================
+
+STEP 1: Check Server Console for Exact Error
+--------------------------------------------
+1. Look at the PowerShell window where "npm start" is running
+2. Scroll up and find any lines with "Create booking error:" or "Supabase insert error:"
+3. Copy the exact error message
+4. Share it with me if you still need help
+
+STEP 2: Run This SQL in Supabase
+---------------------------------
+1. Go to: https://app.supabase.com
+2. SQL Editor → New Query
+3. Open file: TEST-DATABASE.sql
+4. Copy the SQL and paste it in Supabase
+5. Click "Run"
+
+This will:
+✅ Show you what columns exist in your bookings table
+✅ Recreate the table with correct structure if needed
+✅ Disable RLS
+✅ Test insert a booking
+
+STEP 3: Restart Your Server
+----------------------------
+1. Go to PowerShell window with server
+2. Press Ctrl+C to stop
+3. Run: npm start
+4. Try creating booking again
+
+STEP 4: Check Browser Console
+-----------------------------
+1. Press F12 in your browser
+2. Go to "Console" tab
+3. Look for any error messages
+4. Screenshot and share if there are errors
+
+========================================
+MOST COMMON CAUSES:
+========================================
+
+1. ❌ RLS (Row Level Security) is blocking
+   → Fix: Run TEST-DATABASE.sql (disables RLS)
+
+2. ❌ Missing columns in bookings table
+   → Fix: Run TEST-DATABASE.sql (recreates table)
+
+3. ❌ Server not connecting to Supabase
+   → Fix: Check SUPABASE_URL and SUPABASE_KEY in server.js
+
+4. ❌ Foreign key constraint failing
+   → Fix: Run TEST-DATABASE.sql (fixes constraints)
+
+========================================
+QUICK TEST:
+========================================
+
+After running TEST-DATABASE.sql in Supabase,
+try creating a booking with:
+- Guest: Test User
+- Email: test@test.com
+- Phone: 1234567890
+- Room Type: standard
+- Check-in: Tomorrow
+- Check-out: Day after
+
+If this works, the problem was table structure.
+If it still fails, check the server console error!
+
+========================================
+

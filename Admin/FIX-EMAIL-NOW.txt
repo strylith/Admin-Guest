@@ -1,0 +1,51 @@
+==========================================
+QUICK FIX FOR EMAIL (5 MINUTES)
+==========================================
+
+Option 1: Get Gmail App Password
+----------------------------------
+1. Go to: https://myaccount.google.com
+2. Click: Security → 2-Step Verification
+3. Enable if not already enabled
+4. Go back to: Security → App passwords
+5. Generate password for "Mail"
+6. Copy the 16-character password
+
+Then edit server.js line 44:
+- Replace 'password123' with your app password
+- Example: 'abcd efgh ijkl mnop'
+
+Option 2: Temporarily Disable Email
+------------------------------------------
+If you don't need email right now, you can:
+1. Comment out email sending code in server.js
+2. System will work WITHOUT email notifications
+3. Add email later when ready
+
+To comment out email:
+- Find line 283-299 in server.js (booking creation)
+- Comment out the sendEmail() call
+- Do the same for other email calls
+
+==========================================
+FILES TO CHECK
+==========================================
+
+✅ server.js - READY (but needs app password)
+✅ package.json - READY
+✅ public/login.html - READY
+✅ public/admin-dashboard.html - READY
+✅ public/staff-dashboard.html - READY
+✅ public/js/*.js - READY
+✅ public/css/*.css - READY
+
+==========================================
+START SERVER COMMAND
+==========================================
+
+npm start
+
+Then open: http://localhost:3000
+
+==========================================
+

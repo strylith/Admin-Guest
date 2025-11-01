@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Availability Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+        }
+        .result {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+            font-family: monospace;
+        }
+        .error {
+            border-left-color: #f44336;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calendar Availability Test</h1>
+    
+    <div class="test-section">
+        <h3>Test 1: Backend Availability Endpoint</h3>
+        <p>This tests if the backend server is running and returns availability data.</p>
+        <button onclick="testAvailability()">Test Availability API</button>
+        <div id="result1" class="result" style="display:none;"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 2: Database Query</h3>
+        <p>This shows the confirmed booking that should appear in the calendar.</p>
+        <div id="result2" class="result">
+            Expected: Booking ID 10, Nov 10-13, 2025, Rooms A1, A2
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 3: Calendar Date Status</h3>
+        <p>Test what the calendar should display for November 10, 2025.</p>
+        <div id="result3" class="result">
+            Expected for Nov 10: "A1, A2" labels, status "available-2" (2 of 4 rooms available)
+        </div>
+    </div>
+
+    <script>
+        async function testAvailability() {
+            const resultDiv = document.getElementById('result1');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/bookings/availability/1?checkIn=2025-11-10&checkOut=2025-11-13&category=rooms');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                resultDiv.className = 'result';
+                resultDiv.innerHTML = `
+                    <strong>✓ Success!</strong><br>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+                // Also update result 3 with actual data
+                if (data.dateAvailability && data.dateAvailability['2025-11-10']) {
+                    const nov10 = data.dateAvailability['2025-11-10'];
+                    document.getElementById('result3').innerHTML = `
+                        <strong>Actual Nov 10 status:</strong><br>
+                        Booked Rooms: ${nov10.bookedRooms.join(', ')}<br>
+                        Available Rooms: ${nov10.availableRooms.join(', ')}<br>
+                        Status: ${nov10.status}<br>
+                        Available Count: ${nov10.availableCount}
+                    `;
+                }
+                
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `
+                    <strong>✗ Error:</strong><br>
+                    ${error.message}<br><br>
+                    <strong>Solution:</strong> Make sure the backend server is running:<br>
+                    <code>cd server && npm start</code>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kina Resort Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <img src="assets/logo.png" alt="Kina Resort Logo" class="logo">
+            <h1>Kina Resort Admin Dashboard</h1>
+            <button id="theme-toggle" class="theme-toggle" title="Toggle Dark/Light Mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <button class="nav-btn active" data-view="bookings">Bookings</button>
+        <button class="nav-btn" data-view="calendar">Calendar</button>
+        <button class="nav-btn" data-view="add-booking">Add Booking</button>
+        <button class="nav-btn" data-view="rooms">Manage Rooms</button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Bookings View -->
+        <div id="bookings-view" class="view active">
+            <div class="view-header">
+                <h2>Booking Management</h2>
+                <div class="filter-controls">
+                    <select id="status-filter">
+                        <option value="all">All Bookings</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="suspicious">Suspicious</option>
+                    </select>
+                </div>
+            </div>
+            <div class="bookings-table-container">
+                <table class="bookings-table">
+                    <thead>
+                        <tr>
+                            <th>Guest Name</th>
+                            <th>Room Type</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Status</th>
+                            <th>Contact</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookings-tbody">
+                        <!-- Bookings will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Calendar View -->
+        <div id="calendar-view" class="view">
+            <div class="view-header">
+                <h2>Monthly Calendar</h2>
+                <div class="calendar-controls">
+                    <button id="prev-month" class="btn btn-secondary">← Previous</button>
+                    <span id="current-month-year"></span>
+                    <button id="next-month" class="btn btn-secondary">Next →</button>
+                </div>
+            </div>
+            <div class="calendar-container">
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Calendar will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <span class="legend-color available"></span>
+                    <span>Available</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color booked"></span>
+                    <span>Booked</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color maintenance"></span>
+                    <span>Maintenance</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Booking View -->
+        <div id="add-booking-view" class="view">
+            <div class="view-header">
+                <h2>Add New Booking</h2>
+            </div>
+            <form id="add-booking-form" class="booking-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guest-name">Guest Name *</label>
+                        <input type="text" id="guest-name" name="guestName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-info">Contact Info *</label>
+                        <input type="text" id="contact-info" name="contactInfo" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="room-type">Room Type *</label>
+                        <select id="room-type" name="roomType" required>
+                            <option value="">Select Room Type</option>
+                            <option value="standard">Standard</option>
+                            <option value="deluxe">Deluxe</option>
+                            <option value="suite">Suite</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-status">Status *</label>
+                        <select id="booking-status" name="status" required>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="pending">Pending</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="check-in">Check-in Date *</label>
+                        <input type="date" id="check-in" name="checkIn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="check-out">Check-out Date *</label>
+                        <input type="date" id="check-out" name="checkOut" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="is-suspicious" name="isSuspicious">
+                        Mark as Suspicious
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Add Booking</button>
+                    <button type="reset" class="btn btn-secondary">Clear Form</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Rooms Management View -->
+        <div id="rooms-view" class="view">
+            <div class="view-header">
+                <h2>Room Management</h2>
+            </div>
+            <div class="rooms-container">
+                <div class="room-category">
+                    <h3>Standard Rooms</h3>
+                    <div class="rooms-list" id="standard-rooms">
+                        <!-- Standard rooms will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="room-category">
+                    <h3>Deluxe Rooms</h3>
+                    <div class="rooms-list" id="deluxe-rooms">
+                        <!-- Deluxe rooms will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="room-category">
+                    <h3>Suites</h3>
+                    <div class="rooms-list" id="suite-rooms">
+                        <!-- Suite rooms will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for booking details -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Booking Details</h3>
+            <div id="modal-booking-info"></div>
+            <div class="modal-actions">
+                <button id="approve-booking" class="btn btn-success">Approve</button>
+                <button id="reject-booking" class="btn btn-danger">Reject</button>
+                <button id="delete-booking" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/bookings.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "Kina Resort Booking",
+  "short_name": "Kina Resort",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#38b6ff",
+  "icons": []
+}
+
+

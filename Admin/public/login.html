@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Kina Resort Admin Panel</title>
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="/assets/logo.png" alt="Kina Resort Logo" class="auth-logo">
+                <h1>Kina Resort</h1>
+                <p>Admin & Staff Portal</p>
+            </div>
+            
+            <!-- User Type Selection (Initial View) -->
+            <div id="userTypeSelection" class="user-type-selection">
+                <h2>Select Your Role</h2>
+                <p class="selection-subtitle">Choose your login type</p>
+                <div class="user-type-buttons">
+                    <button type="button" class="user-type-btn" onclick="selectUserType('staff')">
+                        <svg class="user-type-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <span>Staff</span>
+                    </button>
+                    <button type="button" class="user-type-btn" onclick="selectUserType('admin')">
+                        <svg class="user-type-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                        <span>Admin</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Login Form (Hidden Initially) -->
+            <form id="loginForm" class="auth-form" style="display: none;">
+                <div class="login-header">
+                    <h2 id="loginTitle">Login</h2>
+                    <button type="button" class="back-btn" onclick="goBackToSelection()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                        </svg>
+                        Back
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                        <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                
+                <div id="errorMessage" class="error-message"></div>
+                
+                <input type="hidden" id="userType" name="userType">
+            </form>
+        </div>
+    </div>
+    
+    <script src="/js/auth.js"></script>
+</body>
+</html>

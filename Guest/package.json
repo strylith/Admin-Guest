@@ -1,0 +1,14 @@
+{
+  "name": "kina-resort",
+  "version": "1.0.0",
+  "description": "Kina Resort - Beach Resort Reservation System",
+  "scripts": {
+    "start": "cd server && npm install && npm start",
+    "server": "cd server && npm start",
+    "server:dev": "cd server && npm run dev",
+    "dev": "npm run server:dev"
+  },
+  "keywords": ["resort", "booking", "reservation"],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,46 @@
+========================================
+✅ SERVER STARTED SUCCESSFULLY!
+========================================
+
+A new PowerShell window has opened with your server running.
+
+Access your application at:
+
+Local Access:
+→ http://localhost:3000
+
+Network Access:
+→ http://192.168.100.14:3000
+
+========================================
+WHAT TO DO NOW:
+========================================
+
+1. You should see a new PowerShell window with:
+   "Server running on http://192.168.100.14:3000"
+
+2. Open your browser and go to:
+   http://localhost:3000
+
+3. You'll be redirected to the login page
+
+4. Click "Register here" to create your first admin account
+
+5. Fill in:
+   - Email: your-email@example.com
+   - Password: (choose a strong password)
+   - Confirm Password: (repeat)
+   - Full Name: Your Name
+   - Role: Admin
+
+6. Click Register, then Login with your credentials
+
+========================================
+TO STOP THE SERVER:
+========================================
+
+Go to the PowerShell window where the server is running
+Press: Ctrl + C
+
+========================================
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kina Resort Admin Panel</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <script>
+        // Redirect to login page
+        if (window.location.protocol === 'file:') {
+            // If opened as file, redirect to localhost
+            window.location.href = 'http://localhost:3000/login.html';
+        } else {
+            // If on server, use relative path
+            window.location.href = '/login.html';
+        }
+    </script>
+
+</head>
+<body>
+    <p>Redirecting to login...</p>
+    <p>If you're not redirected, <a href="/login.html">click here</a> or go to <a href="http://localhost:3000/login.html">http://localhost:3000/login.html</a></p>
+</body>
+</html>
